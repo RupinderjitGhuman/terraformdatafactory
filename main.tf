@@ -38,6 +38,7 @@ module "databrickswks" {
   sku = var.Databrick_sku
   nsgpublicid = module.nsg.nsgpublicid
   nsgpvtid = module.nsg.nsgpvtid
+  tags = var.tags
 }
 # Create a Private EndPoints
 module "privateendpoints" {

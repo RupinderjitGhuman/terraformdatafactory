@@ -27,3 +27,6 @@ variable "nsgpvtid" {
   description = "Location for the deployment"
 
 }
+variable "tags" {
+  description = "Tags for the deployment"
+}

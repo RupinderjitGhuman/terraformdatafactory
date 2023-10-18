@@ -16,12 +16,5 @@ resource "azurerm_databricks_workspace" "databricks_workspace" {
         private_subnet_network_security_group_association_id = var.nsgpvtid
       }
   managed_resource_group_name = "${var.Databrick_workspace_name}-workspace-rg"
-  tags = {
-    OwnerBCHO = "Rupinderjit"
-    CostCenter  = "0000-0000-0000"
-    Enviornment = "DEV"
-    SolutionName  = "Terraform Testing databricks Environment"
-    SolutionType  = "M"
-    Project = "Terraform Testing"
-  }   
+  tags = var.tags 
 }
