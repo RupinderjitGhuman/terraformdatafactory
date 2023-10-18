@@ -7,3 +7,6 @@ variable "location" {
   description = "Location for the deployment"
   type        = string
 }
+variable "tags" {
+  description = "Tags for the deployment"
+}

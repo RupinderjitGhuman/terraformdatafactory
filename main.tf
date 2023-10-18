@@ -1,9 +1,11 @@
+
 #Module for Resource Group Create
 
 module "ResourceGroup" {
   source = "./ResourceGroup"
   resource_group_name = var.resource_group_name
   location = var.location
+  tags = var.tags
 }
 #Module for Subnet Create
 module "subnet" {
