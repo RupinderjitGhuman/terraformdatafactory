@@ -12,6 +12,7 @@ pool:
 variables:
   bkstrgrg: 'ET-Functionapp-test'
   bkstrg: 'tfstatefileterraform'
+
   bkcontainer: 'tfstatefileterraform'
   bkstrgkey: 'databrickspipeline.terraform.tfstate'
 
@@ -25,4 +26,50 @@ stages:
             displayName: tfinstall
             inputs:
               terraformVersion: 'latest'
-          
+          - task: TerraformTaskV4@4
+            displayName: 'init' 
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'FHA-M-DEV-TST-001(7739b8d4-eb08-431f-b752-b3bc116a0d8b)'
+              backendAzureRmResourceGroupName: '$(bkstrgrg)'
+              backendAzureRmStorageAccountName: '$(bkstrg)'
+              backendAzureRmContainerName: '$(bkcontainer)'
+              backendAzureRmKey: '$(bkstrgkey)'
+          - task: TerraformTaskV4@4
+            displayName: 'validate'
+            inputs:
+              provider: 'azurerm'
+              command: 'validate'
+  - stage: tfdeploy
+    condition: succeeded('tfvalidate')
+    dependsOn: tfvalidate
+    jobs:
+      - job: apply
+        steps:
+          - task: TerraformInstaller@1
+            displayName: tfinstall
+            inputs:
+              terraformVersion: 'latest'
+          - task: TerraformTaskV4@4
+            displayName: 'init' 
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'FHA-M-DEV-TST-001(7739b8d4-eb08-431f-b752-b3bc116a0d8b)'
+              backendAzureRmResourceGroupName: '$(bkstrgrg)'
+              backendAzureRmStorageAccountName: '$(bkstrg)'
+              backendAzureRmContainerName: '$(bkcontainer)'
+              backendAzureRmKey: '$(bkstrgkey)'
+          - task: TerraformTaskV4@4
+            displayName: 'Plan'
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              environmentServiceNameAzureRM: 'FHA-M-DEV-TST-001(7739b8d4-eb08-431f-b752-b3bc116a0d8b)'
+          - task: TerraformTaskV4@4
+            displayName: 'Apply'
+            inputs:
+              provider: 'azurerm'
+              command: 'apply'
+              environmentServiceNameAzureRM: 'FHA-M-DEV-TST-001(7739b8d4-eb08-431f-b752-b3bc116a0d8b)'
