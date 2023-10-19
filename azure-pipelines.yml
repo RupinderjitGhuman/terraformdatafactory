@@ -13,7 +13,7 @@ variables:
   bkstrgrg: 'ET-Functionapp-test'
   bkstrg: 'tfstatefileterraform'
 
-  bkcontainer: 'tfstatefileterraform'
+  bkcontainer: 'tfstatefilecontainer'
   bkstrgkey: 'databrickspipeline.terraform.tfstate'
 
 stages:
