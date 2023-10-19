@@ -28,7 +28,6 @@ variable "location" {
 }
 variable "tags" {
   description = "Tags for the deployment"
-  type = "map"
 }
 variable "Databrick_workspace_name" {
   description = "ID of an existing virtual network subnet"
