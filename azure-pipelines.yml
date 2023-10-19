@@ -66,7 +66,8 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              environmentServiceNameAzureRM: 'TerraformPipelineTest'
+              commandOptions: '-lock=false'
+              environmentServiceNameAzureRM: 'FHA-M-DEV-TST-001(7739b8d4-eb08-431f-b752-b3bc116a0d8b)'
           - task: TerraformTaskV4@4
             displayName: 'Apply'
             inputs:
