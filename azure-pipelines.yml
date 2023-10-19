@@ -9,3 +9,20 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  bkstrgrg: 'ET-Functionapp-test'
+  bkstrg: 'tfstatefileterraform'
+  bkcontainer: 'tfstatefileterraform'
+  bkstrgkey: 'databrickspipeline.terraform.tfstate'
+
+stages:
+  - stage: tfvalidate
+    jobs:
+      - job: validate
+        continueOnError: false
+        steps:
+          - task: TerraformInstaller@1
+            displayName: tfinstall
+            inputs:
+              terraformVersion: 'latest'
+          
