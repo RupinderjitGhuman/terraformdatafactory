@@ -14,7 +14,7 @@ variables:
   bkstrg: 'tfstatefileterraform'
 
   bkcontainer: 'tfstatefilecontainer'
-  bkstrgkey: 'databrickspipeline.terraform.tfstate'
+  bkstrgkey: 'databricksnewpipeline.terraform.tfstate'
 
 stages:
   - stage: tfvalidate
