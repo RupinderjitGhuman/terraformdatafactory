@@ -12,7 +12,6 @@ pool:
 variables:
   bkstrgrg: 'ET-Functionapp-test'
   bkstrg: 'tfstatefileterraform'
-
   bkcontainer: 'tfstatefilecontainer'
   bkstrgkey: 'databricksnewpipeline.terraform.tfstate'
 
@@ -66,7 +65,6 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              commandOptions: '-lock=false'
               environmentServiceNameAzureRM: 'TerraformPipelineTest'
           - task: TerraformTaskV4@4
             displayName: 'Apply'
