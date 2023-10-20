@@ -1,23 +1,4 @@
-variable "bkstrgrg" {
-  type        = string
-  description = "The name of the backend storage account resource group"
-}
 
-variable "bkstrg" {
-  type        = string
-  description = "The name of the backend storage account"
-  
-}
-
-variable "bkcontainer" {
-  type = string
-  description = "The container name for the backend config"
-}
-
-variable "bkstrgkey" {
-  type = string
-  description = "The access key for the storage account"
-}
 variable "resource_group_name" {
   description = "Name of the Azure Resource Group"
   type        = string
