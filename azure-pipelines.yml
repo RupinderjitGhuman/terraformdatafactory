@@ -31,10 +31,10 @@ stages:
               provider: 'azurerm'
               command: 'init'
               backendServiceArm: 'TerraformPipelineTest'
-              backendAzureRmResourceGroupName: 'ET-Functionapp-test'
-              backendAzureRmStorageAccountName: 'tfstatefileterraform'
-              backendAzureRmContainerName: 'tfstatefilecontainer'
-              backendAzureRmKey: 'databricksnewpipeline.terraform.tfstate'
+              backendAzureRmResourceGroupName: '$(bkstrgrg)'
+              backendAzureRmStorageAccountName: '$(bkstrg)'
+              backendAzureRmContainerName: '$(bkcontainer)'
+              backendAzureRmKey: '$(bkstrgkey)'
           - task: TerraformTaskV4@4
             displayName: 'validate'
             inputs:
@@ -56,10 +56,10 @@ stages:
               provider: 'azurerm'
               command: 'init'
               backendServiceArm: 'TerraformPipelineTest'
-              backendAzureRmResourceGroupName: 'ET-Functionapp-test'
-              backendAzureRmStorageAccountName: 'tfstatefileterraform'
-              backendAzureRmContainerName: 'tfstatefilecontainer'
-              backendAzureRmKey: 'databricksnewpipeline.terraform.tfstate'
+              backendAzureRmResourceGroupName: '$(bkstrgrg)'
+              backendAzureRmStorageAccountName: '$(bkstrg)'
+              backendAzureRmContainerName: '$(bkcontainer)'
+              backendAzureRmKey: '$(bkstrgkey)'
           - task: TerraformTaskV4@4
             displayName: 'Plan'
             inputs:
