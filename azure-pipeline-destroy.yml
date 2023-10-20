@@ -1,0 +1,49 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  bkstrgrg: 'ET-Functionapp-test'
+  bkstrg: 'tfstatefileterraform'
+  bkcontainer: 'tfstatefilecontainer'
+  bkstrgkey: 'databricksnewpipeline.terraform.tfstate'
+
+stages:
+  - stage: tfdestroy
+    dependsOn: tfvalidate
+    jobs:
+      - job: destory
+        steps:
+          - task: TerraformInstaller@1
+            displayName: tfinstall
+            inputs:
+              terraformVersion: 'latest'
+          - task: TerraformTaskV4@4
+            displayName: 'init' 
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'TerraformPipelineTest'
+              backendAzureRmResourceGroupName: '$(bkstrgrg)'
+              backendAzureRmStorageAccountName: '$(bkstrg)'
+              backendAzureRmContainerName: '$(bkcontainer)'
+              backendAzureRmKey: '$(bkstrgkey)'
+          - task: TerraformTaskV4@4
+            displayName: 'Plan'
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              environmentServiceNameAzureRM: 'TerraformPipelineTest'
+          - task: TerraformTaskV4@4
+            displayName: 'Destroy'
+            inputs:
+              provider: 'azurerm'
+              command: 'destroy'
+              environmentServiceNameAzureRM: 'TerraformPipelineTest'
