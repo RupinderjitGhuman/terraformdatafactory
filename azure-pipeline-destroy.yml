@@ -17,7 +17,6 @@ variables:
 
 stages:
   - stage: tfdestroy
-    dependsOn: tfvalidate
     jobs:
       - job: destory
         steps:
